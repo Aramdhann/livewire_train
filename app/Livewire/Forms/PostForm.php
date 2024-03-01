@@ -2,29 +2,25 @@
 
 namespace App\Livewire\Forms;
 
-use Livewire\Form;
-use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Rule;
-use Livewire\Attributes\Validate;
+use Livewire\Form;
 
 class PostForm extends Form
 {
     #[Rule(['required', 'string', 'min:3', 'max:255'])]
-    public string $title = '';
+    public string $body = '';
 
-    #[Rule(['required', 'string', 'min:3', 'max:255'])]
-    public string $body = ''; 
-
-    public function store(): void
+    public function store()
     {
-        $user = User::find(1);
-
-        $user->post()->create(
+        $post = Auth::user()->post()->create(
             $this->validate()
         );
 
-        flash('Post created successfully', 'danger');
-        
+        flash('Post created successfully', 'success');
+
         $this->reset();
+
+        return $post;
     }
 }

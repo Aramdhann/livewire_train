@@ -1,26 +1,16 @@
 <div>
-    <x-flash-message/>
-    
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">New Post</h5>
-            <form wire:submit="save">
-                <div class="mb-4">
-                    <label for="title" class="form-label">Title</label>
-                    <input wire:model="form.title" class="form-control">
-                    @error('form.title')
-                    <div class="text-danger d-block mt-1">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="mb-4">
-                    <label for="body" class="form-label">Body</label>
-                    <textarea wire:model="form.body" class="form-control" id="body" rows="3"></textarea>
-                    @error('form.body')
-                    <div class="text-danger d-block mt-1">{{ $message }}</div>
-                    @enderror
-                </div>
-                <button class="btn btn-primary">Save</button>
-            </form>
+    <x-flash-message />
+
+    <form wire:submit="save">
+        <div class="mb-2">
+            <label for="body" class="visually-hidden">Body</label>
+            <textarea wire:model="form.body" class="form-control" id="body" placeholder="What's on your mind?"></textarea>
+            @error('form.body')
+            <div class="text-danger d-block mt-1">{{ $message }}</div>
+            @enderror
         </div>
-    </div>
+        <div class="d-flex justify-content-end mb-3">
+            <button class="btn btn-primary" type="post">Post</button>
+        </div>
+    </form>
 </div>

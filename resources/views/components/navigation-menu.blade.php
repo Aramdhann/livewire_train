@@ -10,6 +10,18 @@
                 {{-- <x-nav-link :active="request()->routeIs('about')" :href="route('about')">About</x-nav-link>
                 <x-nav-link :active="request()->routeIs('contact')" :href="route('contact')">Contact</x-nav-link> --}}
                 <x-nav-link :active="request()->routeIs('posts.*')" :href="route('posts.index')">Posts</x-nav-link>
+                <x-nav-link :active="request()->routeIs('users.*')" :href="route('users.index')">Users</x-nav-link>
+            </ul>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                @auth
+                <form action="{{ route('logout') }}" method="post">
+                    @csrf
+                    <button class="btn btn-primary" type="submit">Log Out</button>
+                </form>
+
+                @else
+                <button class="btn btn-primary" href='/login'>Log In</button>
+                @endauth
             </ul>
         </div>
     </div>
